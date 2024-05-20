@@ -1,0 +1,188 @@
+$drkgrn: darkolivegreen;
+$drkgry: darkslategrey;
+$ddgblu: dodgerblue;
+$drkblu: darkblue;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+body {
+    background-color: #0c192c;
+    min-height: 100vh;
+}
+
+.container{
+    position: relative;
+    width: 100;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.bubbles{
+    z-index: -100;
+    position: relative;
+    display: flex;
+
+}
+
+.bubbles > span {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #4fc3dc;
+    margin: 0 4;
+    box-shadow: 0 0 0 10px #4fc3dc44,
+    0 0 50px #4fc3dc,
+    0 0 100px #4fc3dc;
+    animation: animate 25s linear infinite;
+    animation-duration: calc(200s / var(--i));
+}
+
+.bubbles > span:nth-child(even){
+    background: #ff2d75;
+    box-shadow: 0 0 0 10px #ff2d7544,
+    0 0 50px #ff2d75,
+    0 0 100px #ff2d75;
+
+}
+
+@keyframes animate {
+    0%{
+        transform: translateY(90vh) scale(0);
+    }
+    0%{
+        transform: translateY(90vh) scale(1);
+    }
+}
+
+.card{
+    width: 90%;
+    max-width: 470px;
+    background: linear-gradient(to bottom right, #C33764  27%, #1D2671 100%);
+    color: white;
+    margin: 40px auto 0;
+    border-radius: 20px;
+    padding: 40px 35px;
+    text-align: center;
+}
+.card2{
+    width: 90%;
+    max-width: 470px;
+    background: linear-gradient(to bottom right, #C33764  27%, #1D2671 100%);
+    color: white;
+    margin: 80px auto 0;
+    border-radius: 20px;
+    padding: 40px 35px;
+    text-align: center;
+}
+
+.search{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.error {
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    font-size: 14px;
+    display: none;
+}
+
+.search > input{
+    font-size: 16px;
+    // Capitalized to prevent Sass
+    // thinking it's the Sass max()
+    font-size: Max(16px, 1em);
+    font-family: inherit;
+    padding: 10px 25px;
+    background: #ebfffc;
+    color: #555;
+    flex: 1;
+    border: 0;
+    border-radius: 30px;
+    margin-right: 16px;
+    transition: 180ms box-shadow ease-in-out;
+    outline: 0;
+
+}
+
+.search > input:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    outline: 3px solid transparent;
+}
+
+.search > button {
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    margin-right: 16px;
+    transition: 180ms box-shadow ease-in-out;
+    outline: 0;
+    text-align: center;
+
+}
+
+.search > button:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    outline: 3px solid transparent;
+}
+.search > button > img {
+    width: 18px;
+    height: auto;
+}
+
+.weather{
+    display: none;
+}
+
+.weather_icon {
+    width: 170px;
+    margin-top: 30px;
+}
+
+.weather > h1 {
+    font-size: 80px;
+    font-weight: 500;
+}
+
+.weather > h2 {
+    font-size: 45px;
+    font-weight: 400;
+    margin-top: -10px;
+}
+
+.details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin-top: 50px;
+}
+
+.col{
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.col > img {
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.humidity, .wind {
+    font-size: 28px;
+    margin-top: -6px;
+}

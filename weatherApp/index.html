@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0" charset="UTF-8" />
+    <link rel="stylesheet"  href="weatherApp.css">
+    <title>Weather App</title>
+
+</head>
+<body>
+
+   <div class="container">
+
+    <div class="bubbles">
+        <span style="--i:11;"></span>
+        <span style="--i:12;"></span>
+        <span style="--i:24;"></span>
+        <span style="--i:10;"></span>
+        <span style="--i:14;"></span>
+        <span style="--i:23;"></span>
+        <span style="--i:18;"></span>
+        <span style="--i:16;"></span>
+        <span style="--i:19;"></span>
+        <span style="--i:20;"></span>
+        <span style="--i:22;"></span>
+        <span style="--i:25;"></span>
+        <span style="--i:16;"></span>
+        <span style="--i:21;"></span>
+        <span style="--i:15;"></span>
+        <span style="--i:13;"></span>
+        <span style="--i:26;"></span>
+        <span style="--i:17;"></span>
+        <span style="--i:13;"></span>
+        <span style="--i:28;"></span>
+        <span style="--i:11;"></span>
+        <span style="--i:12;"></span>
+        <span style="--i:24;"></span>
+        <span style="--i:10;"></span>
+        <span style="--i:14;"></span>
+        <span style="--i:23;"></span>
+        <span style="--i:18;"></span>
+        <span style="--i:16;"></span>
+        <span style="--i:19;"></span>
+        <span style="--i:20;"></span>
+        <span style="--i:22;"></span>
+        <span style="--i:25;"></span>
+        <span style="--i:16;"></span>
+        <span style="--i:21;"></span>
+        <span style="--i:15;"></span>
+        <span style="--i:13;"></span>
+        <span style="--i:26;"></span>
+        <span style="--i:17;"></span>
+        <span style="--i:13;"></span>
+        <span style="--i:28;"></span>
+        <span style="--i:11;"></span>
+        <span style="--i:12;"></span>
+        <span style="--i:24;"></span>
+        <span style="--i:10;"></span>
+        <span style="--i:14;"></span>
+        <span style="--i:23;"></span>
+        <span style="--i:18;"></span>
+        <span style="--i:16;"></span>
+        <span style="--i:19;"></span>
+        <span style="--i:20;"></span>
+        <span style="--i:22;"></span>
+        <span style="--i:25;"></span>
+        <span style="--i:16;"></span>
+        <span style="--i:21;"></span>
+
+    
+       </div>
+
+    <div class="card2">
+        <h1>David's Weather App</h1>
+    </div>
+
+    <div class="card">
+        <div class="search">
+            <input type="text" placeholder="enter city name"
+            spellcheck="false">
+            <button type="submit"><img src="search.png" alt="search button"></button>
+        </div>
+
+        <div class="error">
+            <h1>Error</h1>
+            <h2>Please enter a valid city name</h2>
+
+        </div>
+
+        <div class="weather">
+            <img src="clouds.png" alt="cloud_weather Icon" class="weather_icon"></img>
+            <h1 class="temp">22°C</h1>
+            <h2 class="city">New York</h2>
+            <div class="details">
+                <div class="col">
+                    <img src="humidity.png" alt="humidity Icon">
+                    <div>
+                        <p class="humidity">50%</p>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="wind.png" alt="wind Icon">
+                    <div>
+                        <p class="wind">15 km/h</p>
+                        <p>Wind Speed</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+        const apiKey = "b76f435232769c6914daef972141df52";
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+        const searchBox = document.querySelector(".search input");
+        const searchBtn = document.querySelector(".search button");
+        const weatherIcon = document.querySelector(".weather_icon");
+
+        async function checkWeather(city){
+            const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+
+            if (response.status == 404){
+                document.querySelector(".error").style.display = "block";
+                document.querySelector(".weather").style.display = "none";
+
+            }
+
+            else{
+                
+                var data = await response.json();
+
+                document.querySelector(".temp").innerHTML = Math.round( data.main.temp) + "°C";
+                document.querySelector(".city").innerHTML = data.name;
+                document.querySelector(".humidity").innerHTML = Math.round(data.main.humidity) + "%";
+                document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+
+                if (data.weather[0].main == "Clouds"){ 
+                    weatherIcon.src = "clouds.png";
+                }
+                else if (data.weather[0].main == "Rain") {
+                    weatherIcon.src = "rain.png";
+                }
+                else if (data.weather[0].main == "Clear") {
+                    weatherIcon.src = "clear.png";
+                }
+                else if (data.weather[0].main == "Snow") {
+                    weatherIcon.src = "snow.png";
+                }
+                else if (data.weather[0].main == "Thunderstorm") {
+                    weatherIcon.src = "thunderstorm.png";
+                }
+                else if (data.weather[0].main == "Drizzle") {
+                    weatherIcon.src = "drizzle.png";
+                }
+                else if (data.weather[0].main == "Mist") {
+                    weatherIcon.src = "mist.png";
+                }
+                document.querySelector(".weather").style.display = "block";
+                document.querySelector(".error").style.display = "none";
+                
+            }
+                        
+        }
+        searchBtn.addEventListener("click", () => {
+            checkWeather(searchBox.value);
+        });
+
+    </script>
+
+
+   </div>
+   
+</body>
+
+</html>
